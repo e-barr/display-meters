@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
-import DisplayMeter from './DisplayMeter'
+import DisplayMeter from './DisplayMeter';
+import disagg from '../Disagg';
 
 class App extends Component {
   state = {
-    selectedMeterId: null
+    selectedMeterId: null,
+    selectedMeterInfo: null
   }
 
-  changeSelectedMeterId = (id) => {
+  changeSelectedMeterIdAndInfo = (selectedMeterId) => {
+    const selectedMeterInfo = disagg[parseInt(selectedMeterId)]
     this.setState({
-      selectedMeterId: id
+      selectedMeterId,
+      selectedMeterInfo
     })
   }
 
   render() {
+    debugger;
     return (
       <div className="App">
         <DisplayMeter
-          changeSelectedMeterId={this.changeSelectedMeterId}
+          changeSelectedMeterIdAndInfo={this.changeSelectedMeterIdAndInfo}
+          disagg={disagg}
         />
       </div>
     );
