@@ -21,7 +21,7 @@ for (i in listOfAddresses) {
         let addressInfo = res.data.results
         const { formatted_address } = addressInfo[0]
         const { lat, lng } = addressInfo[0].geometry.location
-        console.log({ formatted_address, latitude: lat, longitude: lng })
+        console.log({ address: formatted_address, latitude: lat, longitude: lng })
         completedRequests++
 
         if (completedRequests === listOfAddresses.length) {
