@@ -18,14 +18,16 @@ class App extends Component {
   }
 
   render() {
-    debugger;
+    const displayChart = this.state.selectedMeterInfo ? <DisplayChart
+      selectedMeterInfo={this.state.selectedMeterInfo}
+    /> : null
     return (
       <div className="App">
         <DisplayMeter
           changeSelectedMeterIdAndInfo={this.changeSelectedMeterIdAndInfo}
           disagg={disagg}
         />
-        {this.state.selectedMeterInfo ? <DisplayChart /> : null }
+        {displayChart}
       </div>
     );
   }
