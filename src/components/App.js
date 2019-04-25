@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DisplayMeter from './DisplayMeter';
+import DisplayChart from './DisplayChart';
 import disagg from '../Disagg';
 
 class App extends Component {
@@ -9,7 +10,7 @@ class App extends Component {
   }
 
   changeSelectedMeterIdAndInfo = (selectedMeterId) => {
-    const selectedMeterInfo = disagg[parseInt(selectedMeterId)]
+    const selectedMeterInfo = disagg[selectedMeterId]
     this.setState({
       selectedMeterId,
       selectedMeterInfo
@@ -24,6 +25,7 @@ class App extends Component {
           changeSelectedMeterIdAndInfo={this.changeSelectedMeterIdAndInfo}
           disagg={disagg}
         />
+        {this.state.selectedMeterInfo ? <DisplayChart /> : null }
       </div>
     );
   }
