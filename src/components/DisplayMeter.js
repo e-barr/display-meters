@@ -20,9 +20,10 @@ class DisplayMeter extends Component {
     }
 
     render() {
+        const renderedMeters = this.renderMeters(this.props.disagg)
         return (
             <div>
-                {this.renderMeters(this.props.disagg)}
+                {renderedMeters}
             </div>
         )
     }

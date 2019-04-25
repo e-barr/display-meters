@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import DisplayMeter from './DisplayMeter';
-import DisplayChart from './DisplayChart';
-import disagg from '../Disagg';
+import React, { Component } from 'react'
+import { HighchartsProvider } from 'react-highcharts-wrapper'
+import DisplayMeter from './DisplayMeter'
+import DisplayChart from './DisplayChart'
+import disagg from '../Disagg'
 
 class App extends Component {
   state = {
@@ -20,14 +21,20 @@ class App extends Component {
   render() {
     const displayChart = this.state.selectedMeterInfo ? <DisplayChart
       selectedMeterInfo={this.state.selectedMeterInfo}
+      selectedMeterId={this.state.selectedMeterId}
     /> : null
     return (
       <div className="App">
-        <DisplayMeter
-          changeSelectedMeterIdAndInfo={this.changeSelectedMeterIdAndInfo}
-          disagg={disagg}
-        />
-        {displayChart}
+        <HighchartsProvider>
+
+          <div>
+            <DisplayMeter
+              changeSelectedMeterIdAndInfo={this.changeSelectedMeterIdAndInfo}
+              disagg={disagg}
+              />
+            {displayChart}
+          </div>
+        </HighchartsProvider>
       </div>
     );
   }
