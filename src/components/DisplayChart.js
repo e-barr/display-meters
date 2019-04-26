@@ -49,7 +49,7 @@ class DisplayChart extends Component {
         const chartTitle = `Meter ${this.props.selectedMeterId} for 2018`
 
             return (
-              <div>
+              <div style={{ margin: '20px' }}>
                 <AbstractChart config={{
                   chart: {
                     type: 'spline',
