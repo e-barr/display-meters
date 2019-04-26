@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { AbstractChart } from 'react-highcharts-wrapper'
+import Highcharts from 'highcharts/highstock'
+import HighchartsReact from 'highcharts-react-official'
 
 class DisplayChart extends Component {
     processInfo = (arrayOfInfo) => {
@@ -47,45 +48,46 @@ class DisplayChart extends Component {
         const allProcessedDataPoints = this.getAllProcessedDataPoints()
         const { BaseLoadData, TSLData, WSLData } = allProcessedDataPoints
         const chartTitle = `Meter ${this.props.selectedMeterId} for 2018`
+        const options = {
+            title: {
+                text: chartTitle
+            },
+            xAxis: {
+                title: {
+                    text: 'Date'
+                },
+                type: 'datetime',
+                dateTimeLabelFormats: {
+                    day: '%b %e'
+                }
+            },
+            plotOptions: {
+              series: {
+                  allowPointSelect: true
+              }
+            },
+            series: [{
+              name: 'BaseLoad',
+              data: BaseLoadData,
+            },
+            {
+                name: 'TSL',
+                data: TSLData,
+            },
+            {
+                name: 'WSL',
+                data: WSLData,
+            }
+          ],
+        }
 
             return (
-              <div>
-                <AbstractChart config={{
-                  chart: {
-                    type: 'spline',
-                    zoomType: 'x'
-                  },
-                  title: {
-                      text: chartTitle
-                  },
-                  xAxis: {
-                      title: {
-                          text: 'Date'
-                      },
-                      type: 'datetime',
-                      dateTimeLabelFormats: {
-                          day: '%b %e'
-                      }
-                  },
-                  plotOptions: {
-                    series: {
-                        allowPointSelect: true
-                    }
-                  },
-                  series: [{
-                    name: 'BaseLoad',
-                    data: BaseLoadData,
-                  },
-                  {
-                      name: 'TSL',
-                      data: TSLData,
-                  },
-                  {
-                      name: 'WSL',
-                      data: WSLData,
-                  }
-                ],
-                }} />
+              <div style={{ margin: '20px' }}>
+                <HighchartsReact
+                    highcharts={Highcharts}
+                    constructorType={'stockChart'}
+                    options={options}
+                />
               </div>
             )
     }
