@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { HighchartsProvider } from 'react-highcharts-wrapper'
 import DisplayMeter from './DisplayMeter'
 import DisplayChart from './DisplayChart'
 import disagg from '../Disagg'
@@ -25,8 +24,6 @@ class App extends Component {
     /> : null
     return (
       <div className="App">
-        <HighchartsProvider>
-
           <div>
             <DisplayMeter
               changeSelectedMeterIdAndInfo={this.changeSelectedMeterIdAndInfo}
@@ -34,7 +31,6 @@ class App extends Component {
               />
             {displayChart}
           </div>
-        </HighchartsProvider>
       </div>
     );
   }
