@@ -52,7 +52,8 @@ class DisplayChart extends Component {
               <div>
                 <AbstractChart config={{
                   chart: {
-                    type: 'spline'
+                    type: 'spline',
+                    zoomType: 'x'
                   },
                   title: {
                       text: chartTitle
@@ -65,6 +66,11 @@ class DisplayChart extends Component {
                       dateTimeLabelFormats: {
                           day: '%b %e'
                       }
+                  },
+                  plotOptions: {
+                    series: {
+                        allowPointSelect: true
+                    }
                   },
                   series: [{
                     name: 'BaseLoad',
