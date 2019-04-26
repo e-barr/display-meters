@@ -4,14 +4,13 @@ import React, { Component } from 'react'
 class DisplayMeter extends Component {
     renderMeters (metersInfo) {
         let renderedMeters = []
-        const styleConfig = { padding: '5px', display: 'inline-block', border: 'none', borderRadius: '2px', margin: '5px', backgroundColor: 'white', textAlign: 'center', textDecoration: 'none' }
 
         for (let meterId in metersInfo) {
             let oneMeter = (
                 <div
                     onClick={() => {this.props.changeSelectedMeterIdAndInfo(meterId)}}
                     key={meterId}
-                    style={styleConfig}
+                    className="four wide column"
                 >
                     {meterId}
                 </div>
@@ -27,7 +26,7 @@ class DisplayMeter extends Component {
             <div style={{ padding: '5%' }}>
                 <h1>Meters</h1>
                 <p>Select a meter to view the graph.</p>
-                <div style={{ backgroundColor: '#CCC', borderRadius: '2px', padding: '10px' }}>
+                <div className="ui grid">
                     {renderedMeters}
                 </div>
             </div>
