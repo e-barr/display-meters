@@ -26,32 +26,28 @@ class DisplayChart extends Component {
         const processedTSLData = this.getProcessedDataPoints(TSLData)
         const processedWSLData = this.getProcessedDataPoints(WSLData)
 
-        return [processedBaseLoadData, processedTSLData, processedWSLData]
+        return { BaseLoadData: processedBaseLoadData, TSLData: processedTSLData, WSLData: processedWSLData }
     }
 
     getProcessedDataPoints = (dataPoints) => {
         let processedDataPoints = []
 
         dataPoints.forEach(dataPoint => {
-            let xCoor = dataPoint.Date
+            let strDate = dataPoint.Date
+            let digits = strDate.split("-").map(n => parseInt(n))
+            let xCoor = Date.UTC(digits[0], digits[1] - 1, digits[2])
             let yCoor = dataPoint[1]
             processedDataPoints.push([xCoor, yCoor])
         })
 
         return processedDataPoints
     }
-
-    
-    
+   
     render() {
         const allProcessedDataPoints = this.getAllProcessedDataPoints()
-        const BaseLoadData = allProcessedDataPoints[0]
-        const TSLData = allProcessedDataPoints[1]
-        const WSLData = allProcessedDataPoints[2]
-        const chartTitle = `Meter ${this.props.selectedMeterId}`
+        const { BaseLoadData, TSLData, WSLData } = allProcessedDataPoints
+        const chartTitle = `Meter ${this.props.selectedMeterId} for 2018`
 
-        // debugger;
-    
             return (
               <div>
                 <AbstractChart config={{
@@ -60,6 +56,15 @@ class DisplayChart extends Component {
                   },
                   title: {
                       text: chartTitle
+                  },
+                  xAxis: {
+                      title: {
+                          text: 'Date'
+                      },
+                      type: 'datetime',
+                      dateTimeLabelFormats: {
+                          day: '%b %e'
+                      }
                   },
                   series: [{
                     name: 'BaseLoad',
@@ -77,7 +82,6 @@ class DisplayChart extends Component {
                 }} />
               </div>
             )
-        //   };
     }
 }
 
